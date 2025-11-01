@@ -18,11 +18,11 @@
     "number",
     "validation"
   ],
-  "author": "Ashkan Yaghoubi (AshixDev)",
+  "author": "Ashkan Yaghoubi (ashkanjaycob)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashixdev/persian-react-hooks.git"
+    "url": "https://github.com/ashkanjaycob/persian-react-hooks.git"
   },
   "scripts": {
     "build": "tsup",
@@ -30,7 +30,7 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "react": ">=17"
+    "react": ">=18"
   },
   "packageManager": "pnpm@10.20.0"
 }
