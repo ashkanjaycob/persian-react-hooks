@@ -1,14 +1,14 @@
-export function useIranianNationalId() {
-  const isValid = (input: string): boolean => {
-    const code = input.replace(/[^0-9]/g, "");
-    if (!/^\d{10}$/.test(code)) return false;
-    const check = +code[9];
-    const sum =
-      code
-        .split("")
-        .slice(0, 9)
-        .reduce((s, d, i) => s + +d * (10 - i), 0) % 11;
-    return (sum < 2 && check === sum) || (sum >= 2 && check + sum === 11);
-  };
-  return { isValid };
-}
+export const validateIranianNationalId = (code: string) => {
+  if (!/^\d{10}$/.test(code)) return false;
+  if (/^(\d)\1{9}$/.test(code)) return false;
+
+  const digits = [...code].map(Number);
+  const check = digits.pop();
+  const sum = digits.reduce((acc, d, i) => acc + d * (10 - i), 0);
+  const remainder = sum % 11;
+
+  return (
+    (remainder < 2 && check === remainder) ||
+    (remainder >= 2 && check === 11 - remainder)
+  );
+};
