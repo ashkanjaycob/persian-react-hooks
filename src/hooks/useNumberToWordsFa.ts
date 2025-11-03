@@ -1,9 +1,32 @@
 import { useCallback } from "react";
 
-const ones = ["", "یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"];
-const tens = [
+const ONES = [
   "",
-  "ده",
+  "یک",
+  "دو",
+  "سه",
+  "چهار",
+  "پنج",
+  "شش",
+  "هفت",
+  "هشت",
+  "نه",
+] as const;
+const TEENS: Record<number, string> = {
+  10: "ده",
+  11: "یازده",
+  12: "دوازده",
+  13: "سیزده",
+  14: "چهارده",
+  15: "پانزده",
+  16: "شانزده",
+  17: "هفده",
+  18: "هجده",
+  19: "نوزده",
+};
+const TENS = [
+  "",
+  "",
   "بیست",
   "سی",
   "چهل",
@@ -12,10 +35,10 @@ const tens = [
   "هفتاد",
   "هشتاد",
   "نود",
-];
-const hundreds = [
+] as const;
+const HUNDREDS = [
   "",
-  "یکصد",
+  "صد",
   "دویست",
   "سیصد",
   "چهارصد",
@@ -24,27 +47,63 @@ const hundreds = [
   "هفتصد",
   "هشتصد",
   "نهصد",
-];
-const scales = ["", "هزار", "میلیون", "میلیارد"];
+] as const;
+const SCALES = ["", "هزار", "میلیون", "میلیارد"] as const;
+
+const joinW = (parts: string[]) => parts.filter(Boolean).join(" و ");
+
+const chunkToWords = (n: number) => {
+  if (n === 0) return "";
+  const h = Math.floor(n / 100);
+  const rest = n % 100;
+  const parts: string[] = [];
+
+  if (h) parts.push(HUNDREDS[h]);
+
+  if (rest) {
+    if (rest >= 10 && rest <= 19) {
+      parts.push(TEENS[rest]);
+    } else {
+      const t = Math.floor(rest / 10);
+      const o = rest % 10;
+      if (t) parts.push(TENS[t]);
+      if (o) parts.push(ONES[o]);
+    }
+  }
+  return joinW(parts);
+};
 
 export function useNumberToWordsFa() {
   const toWords = useCallback((num: number): string => {
+    if (!Number.isFinite(num) || Math.trunc(num) !== num) {
+      throw new Error("فقط اعداد صحیح مجاز است.");
+    }
+    if (Math.abs(num) >= 1_000_000_000_000) {
+      throw new Error("تا «میلیارد» پشتیبانی می‌شود.");
+    }
     if (num === 0) return "صفر";
+    if (num < 0) return "منفی " + toWords(-num);
+
     const parts: string[] = [];
+    let n = num;
     let i = 0;
-    while (num > 0) {
-      const chunk = num % 1000;
+
+    while (n > 0) {
+      const chunk = n % 1000;
       if (chunk) {
-        const h = Math.floor(chunk / 100);
-        const t = Math.floor((chunk % 100) / 10);
-        const o = chunk % 10;
-        const str = [hundreds[h], tens[t], ones[o]].filter(Boolean).join(" و ");
-        parts.unshift(`${str} ${scales[i]}`.trim());
+        if (i === 1 && chunk === 1) {
+          parts.unshift("هزار");
+        } else {
+          const words = chunkToWords(chunk);
+          parts.unshift(SCALES[i] ? `${words} ${SCALES[i]}` : words);
+        }
       }
-      num = Math.floor(num / 1000);
+      n = Math.floor(n / 1000);
       i++;
     }
-    return parts.join(" و ");
+
+    return joinW(parts);
   }, []);
+
   return { toWords };
 }
