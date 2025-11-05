@@ -17,7 +17,7 @@ declare function useMobileValidator(): {
     formatPhone: (phone: string) => string;
 };
 
-declare const isValidNationalId: (code: string) => boolean;
+declare const useNationalIdValidator: (code: string) => boolean;
 
 declare function useNumberToWordsFa(): {
     numberToWordsFa: (num: number) => string;
@@ -53,4 +53,4 @@ declare function useTypingLanguageFa(): {
     checkLanguage: (value: string) => void;
 };
 
-export { isValidCompanyId, isValidNationalId, useBankCardValidator, useMobileValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
+export { isValidCompanyId, useBankCardValidator, useMobileValidator, useNationalIdValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
