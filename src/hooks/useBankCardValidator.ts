@@ -149,26 +149,23 @@ const luhnCheck = (digits: string) => {
 };
 
 export function useBankCardValidator() {
-  const formatCard = useCallback((card: string): string => {
+  const formatBankCard = useCallback((card: string): string => {
     const digits = normalizeDigits(card).slice(0, 16);
     return digits.replace(/(.{4})/g, "$1 ").trim();
   }, []);
 
-  const isValidCard = useCallback((card: string): boolean => {
+  const isValidBankCard = useCallback((card: string): boolean => {
     const digits = normalizeDigits(card);
     if (digits.length !== 16) return false;
     if (/^(\d)\1{15}$/.test(digits)) return false;
     return luhnCheck(digits);
   }, []);
 
-  const getBankByCard = useCallback(
-    (card: string | number): BankInfo | null => {
-      const digits = normalizeDigits(card);
-      if (digits.length < 6) return null;
-      return BIN6_TO_BANK[digits.slice(0, 6)] ?? null;
-    },
-    []
-  );
+  const getBankInfo = useCallback((card: string | number): BankInfo | null => {
+    const digits = normalizeDigits(card);
+    if (digits.length < 6) return null;
+    return BIN6_TO_BANK[digits.slice(0, 6)] ?? null;
+  }, []);
 
-  return { isValidCard, formatCard, getBankByCard };
+  return { isValidBankCard, formatBankCard, getBankInfo };
 }

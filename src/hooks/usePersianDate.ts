@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 export function usePersianDate() {
-  const toPersianDate = useCallback(
+  const toDateFa = useCallback(
     (date: string | Date, opts?: Intl.DateTimeFormatOptions) => {
       const d = new Date(date);
       return new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
@@ -13,5 +13,5 @@ export function usePersianDate() {
     },
     []
   );
-  return { toPersianDate };
+  return { toDateFa };
 }
