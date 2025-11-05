@@ -1,6 +1,6 @@
 {
   "name": "persian-react-hooks",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A lightweight TypeScript-ready collection of Persian React hooks for dates, numbers, validation, and UI utilities.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
