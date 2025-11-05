@@ -1,32 +1,3 @@
-declare function usePersianDigits(): {
-    toPersianDigits: (value: string | number, options?: {
-        comma?: boolean;
-    }) => string;
-};
-
-declare function useEnglishDigits(): {
-    toEnglishDigits: (input: string) => string;
-};
-
-declare function usePersianDate(): {
-    toPersianDate: (date: string | Date, opts?: Intl.DateTimeFormatOptions) => string;
-};
-
-declare function useTimeAgoFa(date: string | Date, autoUpdate?: boolean): {
-    toTimeAgo: (target: string | Date) => string;
-};
-
-declare function useNumberToWordsFa(): {
-    toWords: (num: number) => string;
-};
-
-declare const validateIranianNationalId: (code: string) => boolean;
-
-declare function useIranianPhone(): {
-    normalizePhone: (phone: string) => string;
-    isValidPhone: (phone: string) => boolean;
-};
-
 type BankInfo = {
     id: string;
     fa: string;
@@ -34,36 +5,52 @@ type BankInfo = {
     bin: string;
 };
 declare function useBankCardValidator(): {
-    isValidCard: (card: string) => boolean;
-    formatCard: (card: string) => string;
-    getBankByCard: (card: string | number) => BankInfo | null;
+    isValidBankCard: (card: string) => boolean;
+    formatBankCard: (card: string) => string;
+    getBankInfo: (card: string | number) => BankInfo | null;
 };
 
-declare function useTextDirection(): {
-    dir: (text: string) => "rtl" | "ltr";
+declare const isValidCompanyId: (code: string) => boolean;
+
+declare function useMobileValidator(): {
+    isValidPhone: (phone: string) => boolean;
+    formatPhone: (phone: string) => string;
 };
 
-declare function useNormalizePersianText(): {
-    normalize: (text: string) => string;
+declare const isValidNationalId: (code: string) => boolean;
+
+declare function useNumberToWordsFa(): {
+    numberToWordsFa: (num: number) => string;
 };
 
-declare function usePersianKeyboard(): {
-    isPersianTyping: boolean;
-    detectLanguage: (value: string) => void;
+type PaginationLabels = {
+    next: string;
+    prev: string;
+    first: string;
+    last: string;
+    page: string;
+    of: string;
+    rowsPerPage: string;
+    noData: string;
+    loading: string;
+};
+declare function usePaginationLabelsFa(): {
+    labels: PaginationLabels;
 };
 
-declare function usePersianPaginationLabels(): {
-    labels: {
-        next: string;
-        prev: string;
-        first: string;
-        last: string;
-        page: string;
-        of: string;
-        rowsPerPage: string;
-        noData: string;
-        loading: string;
-    };
+declare function usePersianDate(): {
+    toDateFa: (date: string | Date, opts?: Intl.DateTimeFormatOptions) => string;
 };
 
-export { useBankCardValidator, useEnglishDigits, useIranianPhone, useNormalizePersianText, useNumberToWordsFa, usePersianDate, usePersianDigits, usePersianKeyboard, usePersianPaginationLabels, useTextDirection, useTimeAgoFa, validateIranianNationalId };
+declare const usePersianTextNormalizer: (text: string) => string;
+
+declare function useRelativeTimeFa(autoUpdate?: boolean): {
+    toRelativeTime: (input: string | Date) => string;
+};
+
+declare function useTypingLanguageFa(): {
+    isPersianText: boolean;
+    checkLanguage: (value: string) => void;
+};
+
+export { isValidCompanyId, isValidNationalId, useBankCardValidator, useMobileValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
