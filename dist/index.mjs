@@ -189,7 +189,7 @@ function useMobileValidator() {
 }
 
 // src/hooks/useNationalIdValidator.ts
-var isValidNationalId = (code) => {
+var useNationalIdValidator = (code) => {
   const normalized = code.replace(/\D/g, "");
   if (!/^\d{10}$/.test(normalized)) return false;
   if (/^(\d)\1{9}$/.test(normalized)) return false;
@@ -422,4 +422,4 @@ function useTypingLanguageFa() {
   return { isPersianText, checkLanguage };
 }
 
-export { isValidCompanyId, isValidNationalId, useBankCardValidator, useMobileValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
+export { isValidCompanyId, useBankCardValidator, useMobileValidator, useNationalIdValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
