@@ -1,4 +1,4 @@
-export const isValidCompanyId = (code: string): boolean => {
+export const useCompanyIdValidator = (code: string): boolean => {
   const normalized = code.replace(/\D/g, "");
   if (!/^\d{11}$/.test(normalized)) return false;
 
