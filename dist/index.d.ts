@@ -20,18 +20,23 @@ declare function useNumberToWordsFa(): {
     toWords: (num: number) => string;
 };
 
-declare function useIranianNationalId(): {
-    isValid: (input: string) => boolean;
-};
+declare const validateIranianNationalId: (code: string) => boolean;
 
 declare function useIranianPhone(): {
     normalizePhone: (phone: string) => string;
     isValidPhone: (phone: string) => boolean;
 };
 
+type BankInfo = {
+    id: string;
+    fa: string;
+    en: string;
+    bin: string;
+};
 declare function useBankCardValidator(): {
     isValidCard: (card: string) => boolean;
     formatCard: (card: string) => string;
+    getBankByCard: (card: string | number) => BankInfo | null;
 };
 
 declare function useTextDirection(): {
@@ -61,4 +66,4 @@ declare function usePersianPaginationLabels(): {
     };
 };
 
-export { useBankCardValidator, useEnglishDigits, useIranianNationalId, useIranianPhone, useNormalizePersianText, useNumberToWordsFa, usePersianDate, usePersianDigits, usePersianKeyboard, usePersianPaginationLabels, useTextDirection, useTimeAgoFa };
+export { useBankCardValidator, useEnglishDigits, useIranianPhone, useNormalizePersianText, useNumberToWordsFa, usePersianDate, usePersianDigits, usePersianKeyboard, usePersianPaginationLabels, useTextDirection, useTimeAgoFa, validateIranianNationalId };

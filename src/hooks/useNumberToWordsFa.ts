@@ -74,7 +74,7 @@ const chunkToWords = (n: number) => {
 };
 
 export function useNumberToWordsFa() {
-  const toWords = useCallback((num: number): string => {
+  const numberToWordsFa = useCallback((num: number): string => {
     if (!Number.isFinite(num) || Math.trunc(num) !== num) {
       throw new Error("فقط اعداد صحیح مجاز است.");
     }
@@ -82,7 +82,7 @@ export function useNumberToWordsFa() {
       throw new Error("تا «میلیارد» پشتیبانی می‌شود.");
     }
     if (num === 0) return "صفر";
-    if (num < 0) return "منفی " + toWords(-num);
+    if (num < 0) return "منفی " + numberToWordsFa(-num);
 
     const parts: string[] = [];
     let n = num;
@@ -105,5 +105,5 @@ export function useNumberToWordsFa() {
     return joinW(parts);
   }, []);
 
-  return { toWords };
+  return { numberToWordsFa };
 }
