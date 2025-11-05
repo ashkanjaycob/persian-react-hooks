@@ -423,5 +423,3 @@ function useTypingLanguageFa() {
 }
 
 export { isValidCompanyId, isValidNationalId, useBankCardValidator, useMobileValidator, useNumberToWordsFa, usePaginationLabelsFa, usePersianDate, usePersianTextNormalizer, useRelativeTimeFa, useTypingLanguageFa };
-//# sourceMappingURL=index.mjs.map
-//# sourceMappingURL=index.mjs.map

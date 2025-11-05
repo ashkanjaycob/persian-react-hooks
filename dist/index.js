@@ -434,5 +434,3 @@ exports.usePersianDate = usePersianDate;
 exports.usePersianTextNormalizer = usePersianTextNormalizer;
 exports.useRelativeTimeFa = useRelativeTimeFa;
 exports.useTypingLanguageFa = useTypingLanguageFa;
-//# sourceMappingURL=index.js.map
-//# sourceMappingURL=index.js.map

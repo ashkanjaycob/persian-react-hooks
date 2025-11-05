@@ -1,4 +1,4 @@
-export const isValidNationalId = (code: string): boolean => {
+export const useNationalIdValidator = (code: string): boolean => {
   const normalized = code.replace(/\D/g, "");
 
   if (!/^\d{10}$/.test(normalized)) return false;
